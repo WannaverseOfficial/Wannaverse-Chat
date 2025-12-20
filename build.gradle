@@ -1,43 +1,36 @@
 plugins {
-    alias(libs.plugins.java)
-    alias(libs.plugins.spotless)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dependency.management)
+	alias(libs.plugins.java)
+	alias(libs.plugins.spring.boot) apply false
+	alias(libs.plugins.spring.dependency.management) apply false
+}
+
+repositories {
+    mavenCentral()
 }
 
 subprojects {
-    apply plugin: "java"
-    apply plugin: "com.diffplug.spotless"
-    apply plugin: "org.springframework.boot"
-    apply plugin: "io.spring.dependency-management"
+	apply plugin: "java"
+	apply plugin: "org.springframework.boot"
+	apply plugin: "io.spring.dependency-management"
 
-    group = "com.wannaverse"
-    version = "0.0.0"
+	group = "com.wannaverse"
+	version = "0.0.0"
 
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        implementation platform(libs.slf4j.bom)
-        implementation platform(libs.jackson.bom)
-
-        implementation libs.bundles.jackson
-        implementation libs.spring.log4j2
-    }
-
-    spotless {
-        java {
-            target "**/src/**/*.java"
-            googleJavaFormat("1.18.1").aosp()
-            importOrder "", "javax", "java", "\\#"
-            endWithNewline()
-        }
-        groovyGradle {
-            target '**/*.gradle'
-            greclipse()
-            trimTrailingWhitespace()
-            endWithNewline()
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
         }
     }
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation platform(libs.slf4j.bom)
+		implementation platform(libs.jackson.bom)
+
+		implementation libs.bundles.jackson
+		implementation libs.spring.log4j2
+	}
 }
