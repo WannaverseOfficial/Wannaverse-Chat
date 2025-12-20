@@ -1,4 +1,6 @@
 dependencies {
 	implementation libs.spring.boot
 	implementation libs.spring.boot.web
+	implementation libs.spring.boot.jpa
+    runtimeOnly libs.postgres
 }
