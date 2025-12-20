@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: users-microservice
+server:
+  port: 0
