@@ -1,13 +1,12 @@
 [versions]
-springCloudVersion = "2025.1.0"
+springDependencyManagement = "1.1.7"
 slf4j = "2.0.16"
 jackson = "3.0.3"
 spotless = "5.0.0"
 springBoot = "4.0.1"
 
 [libraries]
-spring-cloud-bom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref="springCloudVersion" }
-spring-log4j2 = { group = "org.springframework.boot", name = "spring-boot-starter-log4j2", version.ref = "springBoot"}
+spring-log4j2 = { group = "org.springframework.boot", name = "spring-boot-starter-log4j2", version.ref = "springBoot" }
 slf4j-bom = { group = "org.slf4j", name = "slf4j-bom", version.ref = "slf4j" }
 jackson-bom = { group = "tools.jackson", name = "jackson-bom", version.ref = "jackson" }
 jackson-core = { group = "tools.jackson.core", name = "jackson-core" }
@@ -21,3 +20,4 @@ jackson = ["jackson-annotations", "jackson-core", "jackson-databind"]
 java = { id = "java" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }
