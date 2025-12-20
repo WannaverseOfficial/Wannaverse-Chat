@@ -5,7 +5,6 @@ jackson = "3.0.3"
 springBoot = "4.0.1"
 
 [libraries]
-spring-log4j2 = { group = "org.springframework.boot", name = "spring-boot-starter-log4j2", version.ref = "springBoot" }
 spring-boot = { group = "org.springframework.boot", name = "spring-boot-starter" }
 slf4j-bom = { group = "org.slf4j", name = "slf4j-bom", version.ref = "slf4j" }
 jackson-bom = { group = "tools.jackson", name = "jackson-bom", version.ref = "jackson" }
