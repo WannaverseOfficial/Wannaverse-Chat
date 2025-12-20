@@ -2,7 +2,6 @@
 springDependencyManagement = "1.1.7"
 slf4j = "2.0.16"
 jackson = "3.0.3"
-spotless = "5.0.0"
 springBoot = "4.0.1"
 
 [libraries]
@@ -19,6 +18,5 @@ jackson = ["jackson-annotations", "jackson-core", "jackson-databind"]
 
 [plugins]
 java = { id = "java" }
-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }
