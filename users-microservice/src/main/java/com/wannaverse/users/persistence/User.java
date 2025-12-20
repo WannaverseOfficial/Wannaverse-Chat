@@ -18,21 +18,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email_address", nullable = false, unique = true)
     @NotBlank
     @Email
     @EmailUnique
     private String emailAddress;
 
-    @Column(nullable = false)
+    @Column(name = "first_name", nullable = false)
     @NotBlank
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     @NotBlank
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(name = "display_name", nullable = false)
     @NotBlank
     private String displayName;
 
@@ -41,4 +41,8 @@ public class User {
     @Size(min = 8)
     @ToString.Exclude
     private String password;
+
+    @Column(name = "search_vector", columnDefinition = "tsvector")
+    @ToString.Exclude
+    private String searchVector;
 }
