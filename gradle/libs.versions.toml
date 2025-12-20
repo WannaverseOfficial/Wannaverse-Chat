@@ -14,3 +14,6 @@ jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-an
 
 [bundles]
 jackson = ["jackson-annotations", "jackson-core", "jackson-databind"]
+
+[plugins]
+java = { id = "java" }
