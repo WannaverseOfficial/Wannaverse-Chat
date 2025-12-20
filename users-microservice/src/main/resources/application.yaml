@@ -5,9 +5,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
