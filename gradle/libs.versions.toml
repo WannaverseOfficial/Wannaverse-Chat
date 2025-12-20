@@ -2,6 +2,7 @@
 springCloudVersion = "2025.1.0"
 slf4j = "2.0.16"
 jackson = "3.0.3"
+spotless = "8.1.0"
 
 [libraries]
 spring-cloud-bom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref="springCloudVersion" }
@@ -17,3 +18,4 @@ jackson = ["jackson-annotations", "jackson-core", "jackson-databind"]
 
 [plugins]
 java = { id = "java" }
+spotless = { id = "com.diffplug.gradle.spotless", version.ref = "spotless" }
