@@ -6,6 +6,7 @@ springBoot = "4.0.1"
 
 [libraries]
 spring-boot = { group = "org.springframework.boot", name = "spring-boot-starter" }
+spring-boot-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
 slf4j-bom = { group = "org.slf4j", name = "slf4j-bom", version.ref = "slf4j" }
 jackson-bom = { group = "tools.jackson", name = "jackson-bom", version.ref = "jackson" }
 jackson-core = { group = "tools.jackson.core", name = "jackson-core" }
