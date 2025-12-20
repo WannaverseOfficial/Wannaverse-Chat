@@ -25,5 +25,8 @@ subprojects {
 		implementation platform(libs.jackson.bom)
 
 		implementation libs.bundles.jackson
+
+        compileOnly libs.lombok
+        annotationProcessor libs.lombok
 	}
 }
