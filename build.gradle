@@ -1,0 +1,36 @@
+subprojects {
+    apply plugin: alias(libs.plugins.java)
+    apply plugin: alias(libs.plugins.spotless)
+    apply plugin: alias(libs.plugins.spring.boot)
+
+    group = "com.wannaverse"
+    version = "0.0.0"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation platform(libs.spring.cloud.bom)
+        implementation platform(libs.slf4j.bom)
+        implementation platform(libs.jackson.bom)
+
+        implementation libs.bundles.jackson
+        implementation libs.spring.log4j2
+    }
+
+    spotless {
+        java {
+            target "**/src/**/*.java"
+            googleJavaFormat("1.18.1").aosp()
+            importOrder "", "javax", "java", "\\#"
+            endWithNewline()
+        }
+        groovyGradle {
+            target '**/*.gradle'
+            greclipse()
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+    }
+}
