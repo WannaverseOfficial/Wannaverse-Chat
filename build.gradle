@@ -1,6 +1,7 @@
 subprojects {
     apply plugin: alias(libs.plugins.java)
     apply plugin: alias(libs.plugins.spotless)
+    apply plugin: alias(libs.plugins.spring.boot)
 
     group = "com.wannaverse"
     version = "0.0.0"
