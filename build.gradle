@@ -25,6 +25,7 @@ subprojects {
 		implementation platform(libs.jackson.bom)
 
 		implementation libs.bundles.jackson
+        implementation libs.spring.openapi
 
         compileOnly libs.lombok
         annotationProcessor libs.lombok
