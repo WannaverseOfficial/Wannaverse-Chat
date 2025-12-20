@@ -2,16 +2,16 @@
 springCloudVersion = "2025.1.0"
 slf4j = "2.0.16"
 jackson = "3.0.3"
-spotless = "8.1.0"
-springBootPlugin = "4.0.1"
+spotless = "5.0.0"
+springBoot = "4.0.1"
 
 [libraries]
-spring-cloud-bom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloudVersion" }
-spring-log4j2 = { group = "org.springframework.boot", name = "spring-boot-starter-log4j2" }
+spring-cloud-bom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref="springCloudVersion" }
+spring-log4j2 = { group = "org.springframework.boot", name = "spring-boot-starter-log4j2", version.ref = "springBoot"}
 slf4j-bom = { group = "org.slf4j", name = "slf4j-bom", version.ref = "slf4j" }
 jackson-bom = { group = "tools.jackson", name = "jackson-bom", version.ref = "jackson" }
-jackson-core = { group = "tools.jackson", name = "jackson-core" }
-jackson-databind = { group = "tools.jackson", name = "jackson-databind" }
+jackson-core = { group = "tools.jackson.core", name = "jackson-core" }
+jackson-databind = { group = "tools.jackson.core", name = "jackson-databind" }
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations" }
 
 [bundles]
@@ -19,5 +19,5 @@ jackson = ["jackson-annotations", "jackson-core", "jackson-databind"]
 
 [plugins]
 java = { id = "java" }
-spotless = { id = "com.diffplug.gradle.spotless", version.ref = "spotless" }
-spring-boot = { id = "org.springframework.boot", version.ref = "springBootPlugin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
