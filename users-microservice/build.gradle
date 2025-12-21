@@ -5,6 +5,7 @@ dependencies {
     implementation libs.spring.boot.security
     implementation libs.spring.boot.validation
     implementation libs.bouncycastle.bcprov.jdk18on
-
+    implementation libs.json
+    implementation libs.commons.codec
     runtimeOnly libs.postgres
 }
