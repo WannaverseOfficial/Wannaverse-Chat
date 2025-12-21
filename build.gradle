@@ -1,8 +1,8 @@
 plugins {
-	alias(libs.plugins.java)
-	alias(libs.plugins.spring.boot) apply false
-	alias(libs.plugins.spring.dependency.management) apply false
-	alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.java)
+    alias(libs.plugins.spring.boot) apply false
+    alias(libs.plugins.spring.dependency.management) apply false
+    alias(libs.plugins.spotless)
 }
 
 repositories {
@@ -10,28 +10,29 @@ repositories {
 }
 
 subprojects {
-	apply plugin: "java"
-	apply plugin: "org.springframework.boot"
-	apply plugin: "io.spring.dependency-management"
-	apply plugin: "com.diffplug.spotless"
+    apply plugin: "java"
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: "com.diffplug.spotless"
 
-	group = "com.wannaverse"
-	version = "0.0.0"
+    group = "com.wannaverse"
+    version = "0.0.0"
 
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	dependencies {
-		implementation platform(libs.slf4j.bom)
-		implementation platform(libs.jackson.bom)
+    dependencies {
+        implementation platform(libs.slf4j.bom)
+        implementation platform(libs.jackson.bom)
+        implementation platform(libs.spring.cloud.bom)
 
-		implementation libs.bundles.jackson
+        implementation libs.bundles.jackson
         implementation libs.spring.openapi
 
         compileOnly libs.lombok
         annotationProcessor libs.lombok
-	}
+    }
 
     spotless {
         java {
@@ -43,8 +44,21 @@ subprojects {
                     .reorderImports(true)
                     .groupArtifact('com.google.googlejavaformat:google-java-format')
             trimTrailingWhitespace()
-            indentWithSpaces()
+            leadingTabsToSpaces()
             endWithNewline()
         }
+        groovyGradle {
+            trimTrailingWhitespace()
+            leadingTabsToSpaces()
+            endWithNewline()
+        }
+    }
+}
+
+spotless {
+    groovyGradle {
+        trimTrailingWhitespace()
+        leadingTabsToSpaces()
+        endWithNewline()
     }
 }
