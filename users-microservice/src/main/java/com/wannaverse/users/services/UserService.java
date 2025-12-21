@@ -2,6 +2,7 @@ package com.wannaverse.users.services;
 
 import com.wannaverse.users.persistence.User;
 import com.wannaverse.users.persistence.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

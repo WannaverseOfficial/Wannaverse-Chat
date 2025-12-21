@@ -16,13 +16,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
         LOGGER.trace("Tracing incoming request");
 
-        return http
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-            ).build();
+        return http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(
+                        auth ->
+                                auth.requestMatchers("/**")
+                                        .permitAll()
+                                        .anyRequest()
+                                        .authenticated())
+                .build();
     }
 }

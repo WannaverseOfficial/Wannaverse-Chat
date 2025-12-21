@@ -8,7 +8,7 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-       SpringApplication.run(Main.class);
+        SpringApplication.run(Main.class);
     }
 
     @Bean
