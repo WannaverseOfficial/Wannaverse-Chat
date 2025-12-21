@@ -1,0 +1,32 @@
+services:
+  cassandra:
+    image: cassandra:5.0.6
+    env_file:
+      - .env
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+
+
+  kafka:
+    image: apache/kafka:4.1.1
+    container_name: kafka
+    env_file:
+      - .env
+    ports:
+      - "9092:9092"
+
+  postgres:
+    image: postgres:16
+    env_file:
+      - .env
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+volumes:
+  pg-data:
+  cassandra-data:
