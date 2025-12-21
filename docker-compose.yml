@@ -1,13 +1,8 @@
-networks:
-  cassandra:
-
 services:
   cassandra:
     image: cassandra:5.0.6
     env_file:
       - .env
-    networks:
-      - cassandra
     ports:
       - "9042:9042"
     volumes:
