@@ -46,7 +46,7 @@ public class Jwt {
     private JSONObject buildHeader() {
         jwtHeader.setAlgo(algorithm);
         jwtHeader.setTyp("jwt");
-        jwtHeader.setIss("wc-s");
+        jwtHeader.setIss("wannaverse-chat");
         return new JSONObject(jwtHeader);
     }
 

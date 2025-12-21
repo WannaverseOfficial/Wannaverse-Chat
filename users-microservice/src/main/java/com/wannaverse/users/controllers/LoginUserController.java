@@ -30,7 +30,7 @@ public class LoginUserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ResponseEntity<?> createUser(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String base64Header,
             Optional<String[]> scopes) {
@@ -40,7 +40,7 @@ public class LoginUserController {
         String[] decoded = decodeBase64Header(base64Header);
         Optional<User> oUser = service.findUserByEmailAddress(decoded[0]);
 
-        if (oUser.isEmpty() || isUserPasswordCorrect(oUser.get(), decoded[1])) {
+        if (oUser.isEmpty() || !isUserPasswordCorrect(oUser.get(), decoded[1])) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
@@ -52,7 +52,7 @@ public class LoginUserController {
     }
 
     private boolean isUserPasswordCorrect(User user, String password) {
-        return user == null || !passwordEncoder.matches(password, user.getPassword());
+        return user != null && passwordEncoder.matches(password, user.getPassword());
     }
 
     private static String[] decodeBase64Header(String base64) {
