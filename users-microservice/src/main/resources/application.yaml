@@ -6,17 +6,15 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/postgres_db
+    username: postgres_user
+    password: password
 
 server:
   port: ${PORT:8080}
 
 jwt:
-  secret: 12345
-  expirationMs: 10000000
-  refreshExpirationMs: 10000000
+  secret: ${JWT_SECRET}
 
 logging:
   level:
