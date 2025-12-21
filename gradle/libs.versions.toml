@@ -5,6 +5,7 @@ jackson = "3.0.3"
 springBoot = "4.0.1"
 springDoc = "2.8.14"
 bouncycastle = "1.83"
+spotless = "8.1.0"
 
 [libraries]
 spring-boot = { group = "org.springframework.boot", name = "spring-boot-starter" }
@@ -29,3 +30,4 @@ jackson = ["jackson-annotations", "jackson-core", "jackson-databind"]
 java = { id = "java" }
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
