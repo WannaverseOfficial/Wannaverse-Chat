@@ -1,1 +1,3 @@
 include 'users-microservice'
+
+include 'discovery-service'
