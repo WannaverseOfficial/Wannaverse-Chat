@@ -3,16 +3,19 @@ springDependencyManagement = "1.1.7"
 slf4j = "2.0.16"
 jackson = "3.0.3"
 springBoot = "4.0.1"
+springCloud = "2025.1.0"
 springDoc = "2.8.14"
 bouncycastle = "1.83"
 spotless = "8.1.0"
 
 [libraries]
+spring-cloud-bom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
 spring-boot = { group = "org.springframework.boot", name = "spring-boot-starter" }
 spring-boot-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
 spring-boot-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
 spring-boot-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
+spring-cloud-eureka-server = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-server" }
 spring-openapi = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springDoc" }
 bouncycastle-bcprov-jdk18on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
 slf4j-bom = { group = "org.slf4j", name = "slf4j-bom", version.ref = "slf4j" }

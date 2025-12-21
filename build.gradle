@@ -25,6 +25,7 @@ subprojects {
     dependencies {
         implementation platform(libs.slf4j.bom)
         implementation platform(libs.jackson.bom)
+        implementation platform(libs.spring.cloud.bom)
 
         implementation libs.bundles.jackson
         implementation libs.spring.openapi
