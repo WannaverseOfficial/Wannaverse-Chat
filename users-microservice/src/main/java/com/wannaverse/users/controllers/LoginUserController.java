@@ -19,9 +19,7 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class LoginUserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginUserController.class);
-    private static final String[] DEFAULT_SCOPES = {
-        "user.read"
-    };
+    private static final String[] DEFAULT_SCOPES = {"user.read"};
 
     private final UserService service;
     private final Argon2PasswordEncoder passwordEncoder;
