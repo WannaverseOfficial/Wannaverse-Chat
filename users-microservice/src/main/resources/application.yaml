@@ -13,6 +13,11 @@ spring:
 server:
   port: ${PORT:8080}
 
+jwt:
+  secret: 12345
+  expirationMs: 10000000
+  refreshExpirationMs: 10000000
+
 logging:
   level:
     root: ${LOG_LEVEL:INFO}
