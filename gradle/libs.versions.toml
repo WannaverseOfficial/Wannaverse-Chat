@@ -16,6 +16,8 @@ spring-boot-jpa = { group = "org.springframework.boot", name = "spring-boot-star
 spring-boot-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
 spring-boot-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 spring-cloud-eureka-server = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-server" }
+spring-cloud-eureka-client = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-client" }
+spring-cloud-gateway = { group = "org.springframework.cloud", name = "spring-cloud-starter-gateway-server-webmvc" }
 spring-openapi = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springDoc" }
 bouncycastle-bcprov-jdk18on = { group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bouncycastle" }
 slf4j-bom = { group = "org.slf4j", name = "slf4j-bom", version.ref = "slf4j" }
