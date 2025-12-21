@@ -1,4 +1,4 @@
-package com.wannaverse.users.controllers;
+package com.wannaverse.users.services;
 
 import com.wannaverse.users.persistence.User;
 import com.wannaverse.users.persistence.UserRepository;
