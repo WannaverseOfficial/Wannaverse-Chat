@@ -1,7 +1,5 @@
 package com.wannaverse.users.persistence;
 
-import com.wannaverse.users.annotations.EmailUnique;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -23,7 +21,6 @@ public class User {
     @Column(name = "email_address", nullable = false, unique = true)
     @NotBlank
     @Email
-    @EmailUnique
     private String emailAddress;
 
     @Column(name = "first_name", nullable = false)
@@ -43,8 +40,4 @@ public class User {
     @Size(min = 8)
     @ToString.Exclude
     private String password;
-
-    @Column(name = "search_vector", columnDefinition = "tsvector")
-    @ToString.Exclude
-    private String searchVector;
 }

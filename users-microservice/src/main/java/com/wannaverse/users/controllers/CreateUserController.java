@@ -32,6 +32,10 @@ public class CreateUserController {
     public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
         LOGGER.info("Received account creation request");
 
+        if (service.isEmailAddressInUse(user.getEmailAddress())) {
+            return ResponseEntity.badRequest().body("Email address is already in use");
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         service.save(user);
 
