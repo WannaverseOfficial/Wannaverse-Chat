@@ -4,7 +4,7 @@ slf4j = "2.0.17"
 jackson = "3.0.3"
 springBoot = "4.0.1"
 springCloud = "2025.1.0"
-springDoc = "2.8.14"
+springDoc = "3.0.0"
 bouncycastle = "1.83"
 spotless = "8.1.0"
 
