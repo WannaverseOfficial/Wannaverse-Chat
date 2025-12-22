@@ -1,5 +1,6 @@
-package com.wannaverse.users.persistence;
+package com.wannaverse.users.persistence.jpa;
 
+import com.wannaverse.users.persistence.elastic.ElasticUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -40,4 +41,8 @@ public class User {
     @Size(min = 8)
     @ToString.Exclude
     private String password;
+
+    public ElasticUser toElasticUser() {
+        return new ElasticUser(id, firstName, lastName, displayName);
+    }
 }

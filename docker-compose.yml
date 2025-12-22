@@ -1,13 +1,13 @@
 services:
   cassandra:
     image: cassandra:5.0.6
+    container_name: cassandra
     env_file:
       - .env
     ports:
       - "9042:9042"
     volumes:
       - cassandra-data:/var/lib/cassandra
-
 
   kafka:
     image: apache/kafka:4.1.1
@@ -19,14 +19,28 @@ services:
 
   postgres:
     image: postgres:16
+    container_name: postgres
     env_file:
       - .env
-    container_name: postgres
     ports:
       - "5432:5432"
     volumes:
       - pg-data:/var/lib/postgresql/data
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+
 volumes:
   pg-data:
   cassandra-data:
+  es-data:

@@ -1,6 +1,6 @@
 package com.wannaverse.users.controllers;
 
-import com.wannaverse.users.persistence.User;
+import com.wannaverse.users.persistence.jpa.User;
 import com.wannaverse.users.services.UserService;
 
 import jakarta.validation.Valid;
