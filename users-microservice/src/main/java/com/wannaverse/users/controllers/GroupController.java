@@ -9,7 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/user/group")
@@ -23,7 +28,7 @@ public class GroupController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<UserGroup> getUserGroupById(String groupId) {
+    public ResponseEntity<UserGroup> getUserGroupById(long groupId) {
         return ResponseEntity.of(userGroupService.getUserGroupById(groupId));
     }
 
@@ -37,7 +42,7 @@ public class GroupController {
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<?> deleteUserGroup(String groupId) {
+    public ResponseEntity<?> deleteUserGroup(long groupId) {
         LOGGER.trace("Received user group removal request for {}", groupId);
 
         userGroupService.removeUserGroupById(groupId);

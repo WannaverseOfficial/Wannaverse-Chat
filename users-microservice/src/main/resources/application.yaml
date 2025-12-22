@@ -17,3 +17,4 @@ logging:
   level:
     root: ${LOG_LEVEL:INFO}
     com.wannaverse: ${LOG_LEVEL:TRACE}
+
