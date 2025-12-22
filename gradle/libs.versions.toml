@@ -7,6 +7,7 @@ springCloud = "2025.1.0"
 springDoc = "3.0.0"
 bouncycastle = "1.83"
 spotless = "8.1.0"
+commonsLogging = "1.2"
 
 [libraries]
 spring-cloud-bom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloud" }
@@ -14,6 +15,7 @@ spring-boot = { group = "org.springframework.boot", name = "spring-boot-starter"
 spring-boot-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
 spring-boot-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
+spring-security-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server" }
 spring-boot-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 spring-cloud-eureka-server = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-server" }
 spring-cloud-eureka-client = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-client" }
@@ -27,6 +29,7 @@ jackson-databind = { group = "tools.jackson.core", name = "jackson-databind" }
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations" }
 postgres = { group = "org.postgresql", "name" = "postgresql" }
 lombok = { group = "org.projectlombok", name = "lombok" }
+commons-logging = { group = "commons-logging", name = "commons-logging", version.ref = "commonsLogging"}
 
 [bundles]
 jackson = ["jackson-annotations", "jackson-core", "jackson-databind"]

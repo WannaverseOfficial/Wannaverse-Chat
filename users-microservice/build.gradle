@@ -5,7 +5,10 @@ dependencies {
     implementation libs.spring.boot.security
     implementation libs.spring.boot.validation
     implementation libs.spring.cloud.eureka.client
+    implementation libs.spring.security.authorization.server
+
     implementation libs.bouncycastle.bcprov.jdk18on
+    implementation libs.commons.logging
 
     runtimeOnly libs.postgres
 }
