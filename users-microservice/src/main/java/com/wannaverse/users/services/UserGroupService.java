@@ -27,8 +27,6 @@ public class UserGroupService {
     }
 
     public void removeUserGroupById(long userGroupId) {
-        userGroupRepository
-                .findUserGroupById(userGroupId)
-                .ifPresent(userGroupRepository::delete);
+        userGroupRepository.findUserGroupById(userGroupId).ifPresent(userGroupRepository::delete);
     }
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +26,5 @@ public class UserGroup {
     @Column(nullable = false)
     private String groupName;
 
-    @ElementCollection
-    private List<String> members;
+    @ElementCollection private List<String> members;
 }
