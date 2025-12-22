@@ -18,25 +18,17 @@ public class UserGroupService {
         this.userGroupRepository = userGroupRepository;
     }
 
-    public Optional<UserGroup> getUserGroupById(String id) {
+    public Optional<UserGroup> getUserGroupById(long id) {
         return this.userGroupRepository.findUserGroupById(id);
     }
 
-    public void createUserGroup(UserGroup userGroup) {
+    public void saveUserGroup(UserGroup userGroup) {
         userGroupRepository.save(userGroup);
     }
 
-    public boolean removeUserGroupById(String userGroupId) {
-        final Optional<UserGroup> userGroupOptional =
-                userGroupRepository.findUserGroupById(userGroupId);
-
-        if (userGroupOptional.isEmpty()) {
-            return false;
-        }
-
-        final UserGroup userGroup = userGroupOptional.get();
-
-        userGroupRepository.save(userGroup);
-        return true;
+    public void removeUserGroupById(long userGroupId) {
+        userGroupRepository
+                .findUserGroupById(userGroupId)
+                .ifPresent(u -> userGroupRepository.save(u));
     }
 }

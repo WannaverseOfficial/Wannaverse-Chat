@@ -10,14 +10,15 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "user_groups")
+@Table(name = "user_groups_t")
 public class UserGroup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    @Column private String groupName;
+    @Column(nullable = false)
+    private String groupName;
 
     @ElementCollection private List<String> members;
 }

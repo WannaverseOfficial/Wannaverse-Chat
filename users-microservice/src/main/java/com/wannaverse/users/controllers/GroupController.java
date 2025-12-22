@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/group")
+@RequestMapping("/user/group")
 public class GroupController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
     private final UserGroupService userGroupService;
@@ -23,27 +23,25 @@ public class GroupController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<UserGroup> getUserGroupById(@Valid @RequestBody String id) {
-        return ResponseEntity.of(userGroupService.getUserGroupById(id));
+    public ResponseEntity<UserGroup> getUserGroupById(String groupId) {
+        return ResponseEntity.of(userGroupService.getUserGroupById(groupId));
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> createUserGroup(@Valid @RequestBody UserGroup userGroup) {
-        LOGGER.trace("Received user group creation request");
+    @PostMapping("/")
+    public ResponseEntity<?> createOrUpdateUserGroup(@Valid @RequestBody UserGroup userGroup) {
+        LOGGER.trace("Received user group create/update request");
 
-        userGroupService.createUserGroup(userGroup);
+        userGroupService.saveUserGroup(userGroup);
 
         return ResponseEntity.ok().body("User group created.");
     }
 
-    @DeleteMapping("/remove")
-    public ResponseEntity<?> deleteUserGroup(@Valid @RequestBody String userGroupId) {
-        LOGGER.trace("Received user group removal request");
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteUserGroup(String groupId) {
+        LOGGER.trace("Received user group removal request for {}", groupId);
 
-        if (!userGroupService.removeUserGroupById(userGroupId)) {
-            return ResponseEntity.notFound().build();
-        }
+        userGroupService.removeUserGroupById(groupId);
 
-        return ResponseEntity.ok().body("User group removed.");
+        return ResponseEntity.ok().build();
     }
 }
