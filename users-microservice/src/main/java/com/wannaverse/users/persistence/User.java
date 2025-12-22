@@ -1,5 +1,7 @@
 package com.wannaverse.users.persistence;
 
+import com.wannaverse.users.dto.UserDTO;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -40,4 +42,8 @@ public class User {
     @Size(min = 8)
     @ToString.Exclude
     private String password;
+
+    public UserDTO toUserDTO() {
+        return new UserDTO(id, firstName, lastName, displayName);
+    }
 }

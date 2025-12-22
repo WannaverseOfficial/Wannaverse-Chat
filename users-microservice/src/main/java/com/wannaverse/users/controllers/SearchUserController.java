@@ -1,7 +1,6 @@
 package com.wannaverse.users.controllers;
 
 import com.wannaverse.users.dto.SearchResults;
-import com.wannaverse.users.dto.UserDTO;
 import com.wannaverse.users.persistence.User;
 import com.wannaverse.users.services.UserService;
 
@@ -28,23 +27,17 @@ public class SearchUserController {
     @GetMapping("/search")
     public ResponseEntity<?> searchUsers(
             String query, Optional<Integer> page, Optional<Integer> size, Optional<Long> userId) {
-        if (userId.isPresent()) {
-            Optional<User> oUser = userService.getUserById(userId.get());
 
-            if (oUser.isEmpty()) {
-                return ResponseEntity.ok(new SearchResults<>(List.of(), 0, 0));
-            }
-
-            User user = oUser.get();
-            UserDTO userDTO =
-                    new UserDTO(
-                            user.getId(),
-                            user.getFirstName(),
-                            user.getFirstName(),
-                            user.getDisplayName());
-
-            return ResponseEntity.ok(userDTO);
+        if (userId.isEmpty()) {
+            return ResponseEntity.ok(userService.search(query, page.orElse(0), size.orElse(10)));
         }
-        return ResponseEntity.ok(userService.search(query, page.orElse(0), size.orElse(10)));
+
+        Optional<User> optionalUser = userService.getUserById(userId.get());
+
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.ok(optionalUser.get().toUserDTO());
+        }
+
+        return ResponseEntity.ok(new SearchResults<>(List.of(), 0, 0));
     }
 }
