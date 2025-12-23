@@ -3,6 +3,8 @@ package com.wannaverse.users.services;
 import com.wannaverse.users.persistence.User;
 import com.wannaverse.users.persistence.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +43,7 @@ public class UserService {
         save(savedUser);
     }
 
+    @Transactional
     public void createUser(String userId, User initial) {
         initial.setId(userId);
         initial.setCreationDate(System.currentTimeMillis());
