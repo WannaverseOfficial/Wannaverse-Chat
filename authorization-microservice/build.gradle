@@ -4,6 +4,7 @@ dependencies {
     implementation libs.spring.boot.jpa
     implementation libs.spring.boot.security
     implementation libs.spring.boot.validation
+    implementation libs.spring.boot.kafka
     implementation libs.spring.cloud.eureka.client
     implementation libs.spring.security.authorization.server
 

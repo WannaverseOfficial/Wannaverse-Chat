@@ -17,6 +17,7 @@ spring-boot-jpa = { group = "org.springframework.boot", name = "spring-boot-star
 spring-boot-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
 spring-boot-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 spring-boot-oauth2-resource-server = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server" }
+spring-boot-kafka = { group = "org.springframework.boot", name = "spring-boot-starter-kafka" }
 
 spring-security-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server" }
 spring-cloud-eureka-server = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-server" }
