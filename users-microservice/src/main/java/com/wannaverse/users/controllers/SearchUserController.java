@@ -24,7 +24,7 @@ public class SearchUserController {
 
     @GetMapping("/search")
     public ResponseEntity<?> searchUsers(
-            String query, Optional<Integer> page, Optional<Integer> size, Optional<Long> userId) {
+            String query, Optional<Integer> page, Optional<Integer> size, Optional<String> userId) {
 
         if (userId.isEmpty()) {
             return ResponseEntity.ok(userService.search(query, page.orElse(0), size.orElse(10)));
