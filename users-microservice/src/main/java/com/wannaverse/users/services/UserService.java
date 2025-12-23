@@ -25,7 +25,7 @@ public class UserService {
 
     public Page<User> search(String query, int page, int size) {
         return userRepository
-                .findByEmailAddressContainingIgnoreCaseOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrDisplayNameContainingIgnoreCase(
-                        query, query, query, query, PageRequest.of(page, size));
+                .findByOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrDisplayNameContainingIgnoreCase(
+                        query, query, query, PageRequest.of(page, size));
     }
 }
