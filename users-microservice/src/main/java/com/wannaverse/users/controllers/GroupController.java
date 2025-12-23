@@ -28,7 +28,7 @@ public class GroupController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<UserGroup> getUserGroupById(long groupId) {
+    public ResponseEntity<UserGroup> getUserGroupById(String groupId) {
         return ResponseEntity.of(userGroupService.getUserGroupById(groupId));
     }
 
@@ -42,7 +42,7 @@ public class GroupController {
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<?> deleteUserGroup(long groupId) {
+    public ResponseEntity<?> deleteUserGroup(String groupId) {
         LOGGER.trace("Received user group removal request for {}", groupId);
 
         userGroupService.removeUserGroupById(groupId);

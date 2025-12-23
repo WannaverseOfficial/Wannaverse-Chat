@@ -8,10 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findUserById(long id);
+public interface UserRepository extends JpaRepository<User, String> {
+    Optional<User> findUserById(String id);
 
-    Page<User>
-            findByOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrDisplayNameContainingIgnoreCase(
-                    String firstName, String lastName, String displayName, Pageable pageable);
+    Page<User> findUserByFirstNameIgnoreCaseOrLastNameIgnoreCaseOrDisplayNameIgnoreCase(
+            String firstName, String lastName, String displayName, Pageable pageable);
 }
