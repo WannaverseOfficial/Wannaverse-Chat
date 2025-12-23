@@ -17,18 +17,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "users_t")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
-    @Column(name = "first_name", nullable = false)
-    @NotBlank
-    private String firstName;
+    @Column @NotBlank private Long creationDate;
 
-    @Column(name = "last_name", nullable = false)
-    @NotBlank
-    private String lastName;
+    @Column private String firstName;
 
-    @Column(name = "display_name", nullable = false)
-    @NotBlank
-    private String displayName;
+    @Column private String lastName;
+
+    @Column private String displayName;
+
+    @Column private String about;
 }
