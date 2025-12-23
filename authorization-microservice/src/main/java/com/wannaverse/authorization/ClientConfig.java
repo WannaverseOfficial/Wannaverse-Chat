@@ -1,4 +1,4 @@
-package com.wannaverse.users;
+package com.wannaverse.authorization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +32,8 @@ public class ClientConfig {
                         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                         .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                         .redirectUri(
-                                "http://localhost:%d/callback".formatted(portProvider.getPort()))
+                                "http://localhost:%d/oauth2/callback"
+                                        .formatted(portProvider.getPort()))
                         .scope("read")
                         .clientSettings(
                                 ClientSettings.builder()

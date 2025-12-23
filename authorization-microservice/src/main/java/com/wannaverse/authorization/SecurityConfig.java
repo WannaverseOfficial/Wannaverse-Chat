@@ -1,4 +1,4 @@
-package com.wannaverse.users;
+package com.wannaverse.authorization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +40,9 @@ public class SecurityConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().issuer("http://localhost:%d".formatted(serverPortProvider.getPort())).build();
+        return AuthorizationServerSettings.builder()
+                .issuer("http://localhost:%d".formatted(serverPortProvider.getPort()))
+                .build();
     }
 
     @Bean

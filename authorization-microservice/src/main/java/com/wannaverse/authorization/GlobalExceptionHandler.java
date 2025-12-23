@@ -1,4 +1,4 @@
-package com.wannaverse.users;
+package com.wannaverse.authorization;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

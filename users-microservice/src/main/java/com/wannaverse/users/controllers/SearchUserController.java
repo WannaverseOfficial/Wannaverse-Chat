@@ -1,6 +1,5 @@
 package com.wannaverse.users.controllers;
 
-import com.wannaverse.users.dto.SearchResults;
 import com.wannaverse.users.persistence.User;
 import com.wannaverse.users.services.UserService;
 
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,9 +33,9 @@ public class SearchUserController {
         Optional<User> optionalUser = userService.getUserById(userId.get());
 
         if (optionalUser.isPresent()) {
-            return ResponseEntity.ok(optionalUser.get().toUserDTO());
+            return ResponseEntity.ok(optionalUser.get());
         }
 
-        return ResponseEntity.ok(new SearchResults<>(List.of(), 0, 0));
+        return ResponseEntity.ok().build();
     }
 }
