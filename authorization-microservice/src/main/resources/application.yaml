@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: authorization-microservice
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+server:
+  port: ${PORT:0}
+
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+    com.wannaverse: ${LOG_LEVEL:TRACE}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetchRegistry: true

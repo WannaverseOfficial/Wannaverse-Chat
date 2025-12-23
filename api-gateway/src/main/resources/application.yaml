@@ -7,6 +7,11 @@ spring:
       server:
         webmvc:
           routes:
+            - id: authorization-microservice
+              uri: lb://AUTHORIZATION-MICROSERVICE
+              predicates:
+                - Path=/oauth2/**
+
             - id: users-microservice
               uri: lb://USERS-MICROSERVICE
               predicates:

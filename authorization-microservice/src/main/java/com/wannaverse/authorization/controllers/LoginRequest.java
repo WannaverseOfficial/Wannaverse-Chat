@@ -1,4 +1,4 @@
-package com.wannaverse.users.controllers;
+package com.wannaverse.authorization.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

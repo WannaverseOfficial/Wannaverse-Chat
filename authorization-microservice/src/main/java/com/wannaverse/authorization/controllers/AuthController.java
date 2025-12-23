@@ -1,10 +1,13 @@
-package com.wannaverse.users.controllers;
+package com.wannaverse.authorization.controllers;
 
-import com.wannaverse.users.persistence.User;
-import com.wannaverse.users.services.UserService;
+import com.wannaverse.authorization.persistence.User;
+import com.wannaverse.authorization.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,22 +15,40 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class LoginController {
+@RequestMapping("/oauth2")
+public class AuthController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
     private final UserService userService;
+    private final Argon2PasswordEncoder passwordEncoder;
 
-    public LoginController(UserService userService) {
+    public AuthController(UserService userService, Argon2PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
+        LOGGER.info("Received account creation request");
+
+        if (userService.isEmailAddressInUse(user.getEmailAddress())) {
+            return ResponseEntity.badRequest().body("Email address is already in use");
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.save(user);
+
+        LOGGER.info("{} has been created", user);
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")

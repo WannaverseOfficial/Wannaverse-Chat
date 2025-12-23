@@ -1,4 +1,4 @@
-package com.wannaverse.users;
+package com.wannaverse.authorization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.context.WebServerApplicationContext;

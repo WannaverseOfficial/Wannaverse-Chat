@@ -3,3 +3,5 @@ include 'users-microservice'
 include 'discovery-service'
 
 include 'api-gateway'
+
+include 'authorization-microservice'

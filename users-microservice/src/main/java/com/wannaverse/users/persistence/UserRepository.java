@@ -9,8 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findUserByEmailAddress(String emailAddress);
-
     Optional<User> findUserById(long id);
 
     Page<User>
@@ -20,6 +18,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
                     String lastName,
                     String displayName,
                     Pageable pageable);
-
-    Optional<User> findUserByEmailAddressIgnoreCase(String emailAddress);
 }
