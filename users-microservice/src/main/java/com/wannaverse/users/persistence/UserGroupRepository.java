@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserGroupRepository extends JpaRepository<UserGroup, Long> {
-    Optional<UserGroup> findUserGroupById(long id);
+public interface UserGroupRepository extends JpaRepository<UserGroup, String> {
+    Optional<UserGroup> findUserGroupById(String id);
 }
