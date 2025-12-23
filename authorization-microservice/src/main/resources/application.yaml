@@ -10,6 +10,10 @@ spring:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+
 server:
   port: ${PORT:0}
 
