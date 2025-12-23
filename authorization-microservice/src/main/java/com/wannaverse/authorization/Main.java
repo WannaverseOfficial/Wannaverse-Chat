@@ -31,7 +31,9 @@ public class Main {
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
-        return (jwkSelector, _) -> jwkSelector.select(new JWKSet(generateRsa()));
+        RSAKey rsaKey = generateRsa();
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        return (jwkSelector, _) -> jwkSelector.select(jwkSet);
     }
 
     private static RSAKey generateRsa() {

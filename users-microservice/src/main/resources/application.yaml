@@ -2,6 +2,13 @@ spring:
   application:
     name: users-microservice
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/oauth2/jwks
+          audiences: wannaverse-chat
+
   jpa:
     hibernate:
       ddl-auto: update
