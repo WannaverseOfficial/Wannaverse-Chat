@@ -31,6 +31,8 @@ public class Channel {
     @Column(nullable = false)
     private String name;
 
+    @Column private String ownerId;
+
     @Column(nullable = false)
     private Visibility visibility;
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -28,8 +29,13 @@ public class ChannelController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<?> createChannel(@Valid @RequestBody Channel channel) {
+    public ResponseEntity<?> createChannel(
+            @Valid @RequestBody Channel channel, Principal principal) {
         channel.setCreationDate(System.currentTimeMillis());
+
+        if (channel.getOwnerId().isEmpty()) {
+            channel.setOwnerId(principal.getName());
+        }
 
         channelService.save(channel);
 
