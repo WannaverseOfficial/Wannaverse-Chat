@@ -7,7 +7,13 @@ import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
@@ -21,7 +27,7 @@ public class ChannelController {
         this.channelService = channelService;
     }
 
-    @PostMapping("/")
+    @PutMapping("/")
     public ResponseEntity<?> createChannel(@Valid @RequestBody Channel channel) {
         channel.setCreationDate(System.currentTimeMillis());
 
@@ -30,7 +36,14 @@ public class ChannelController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/")
+    @PostMapping("/")
+    public ResponseEntity<?> updateChannel(@Valid @RequestBody Channel channel) {
+        channelService.save(channel);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/")
     public ResponseEntity<?> deleteChannel(String channelId) {
         channelService.getChannelById(channelId).ifPresent(channelService::delete);
 
