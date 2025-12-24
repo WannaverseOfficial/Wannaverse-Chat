@@ -7,10 +7,9 @@ import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/channel")
@@ -22,11 +21,30 @@ public class ChannelController {
         this.channelService = channelService;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> createChannel(@Valid @RequestBody Channel channel) {
         channel.setCreationDate(System.currentTimeMillis());
 
         channelService.save(channel);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<?> search(
+            String query,
+            Optional<Integer> page,
+            Optional<Integer> size,
+            Optional<String> channelId) {
+        if (channelId.isEmpty()) {
+            return ResponseEntity.ok(channelService.search(query, page.orElse(0), size.orElse(10)));
+        }
+
+        Optional<Channel> optionalChannel = channelService.getChannelById(channelId.get());
+
+        if (optionalChannel.isPresent()) {
+            return ResponseEntity.ok(optionalChannel.get());
+        }
 
         return ResponseEntity.ok().build();
     }
