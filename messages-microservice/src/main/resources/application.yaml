@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: messages-microservice
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/oauth2/jwks
+          audiences: wannaverse-chat
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+
+server:
+  port: ${PORT:0}
+
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+    com.wannaverse: ${LOG_LEVEL:TRACE}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetchRegistry: true

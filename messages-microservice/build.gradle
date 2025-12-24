@@ -1,3 +1,8 @@
 dependencies {
-
+    implementation libs.spring.boot
+    implementation libs.spring.boot.web
+    implementation libs.spring.boot.jpa
+    implementation libs.spring.boot.kafka
+    implementation libs.spring.cloud.eureka.client
+    implementation libs.spring.boot.oauth2.resource.server
 }
