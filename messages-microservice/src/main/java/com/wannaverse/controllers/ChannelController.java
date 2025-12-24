@@ -21,6 +21,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/channel")
 public class ChannelController {
+    private static final int DEFAULT_PAGE = 0;
+    private static final int DEFAULT_NUMBER_OF_SEARCH_RESULTS = 10;
     private final ChannelService channelService;
 
     @Autowired
@@ -63,7 +65,11 @@ public class ChannelController {
             Optional<Integer> size,
             Optional<String> channelId) {
         if (channelId.isEmpty()) {
-            return ResponseEntity.ok(channelService.search(query, page.orElse(0), size.orElse(10)));
+            return ResponseEntity.ok(
+                    channelService.search(
+                            query,
+                            page.orElse(DEFAULT_PAGE),
+                            size.orElse(DEFAULT_NUMBER_OF_SEARCH_RESULTS)));
         }
 
         Optional<Channel> optionalChannel = channelService.getChannelById(channelId.get());
