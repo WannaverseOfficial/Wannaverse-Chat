@@ -31,6 +31,13 @@ public class ChannelController {
     }
 
     @GetMapping("/")
+    public ResponseEntity<?> deleteChannel(String channelId) {
+        channelService.getChannelById(channelId).ifPresent(channelService::delete);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/")
     public ResponseEntity<?> search(
             String query,
             Optional<Integer> page,

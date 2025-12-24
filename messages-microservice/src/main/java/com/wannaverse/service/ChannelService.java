@@ -31,4 +31,8 @@ public class ChannelService {
     public Optional<Channel> getChannelById(String channelId) {
         return channelRepository.findChannelById(channelId);
     }
+
+    public void delete(Channel channel) {
+        channelRepository.delete(channel);
+    }
 }
