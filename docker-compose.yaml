@@ -1,6 +1,7 @@
 services:
   cassandra:
     image: cassandra:5.0.6
+    container_name: cassandra
     env_file:
       - .env
     ports:
