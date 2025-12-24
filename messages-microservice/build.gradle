@@ -5,4 +5,5 @@ dependencies {
     implementation libs.spring.boot.kafka
     implementation libs.spring.cloud.eureka.client
     implementation libs.spring.boot.oauth2.resource.server
+    implementation libs.postgres
 }
