@@ -1,11 +1,13 @@
 package com.wannaverse.controllers;
 
+import com.wannaverse.dto.AddUserRequest;
 import com.wannaverse.persistence.Channel;
 import com.wannaverse.service.ChannelService;
 
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +48,21 @@ public class ChannelController {
 
     @PostMapping
     public ResponseEntity<?> updateChannel(@Valid @RequestBody Channel channel) {
+        channelService.save(channel);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add-user")
+    public ResponseEntity<?> addUserToChannel(@RequestBody AddUserRequest request) {
+        Optional<Channel> optionalChannel = channelService.getChannelById(request.getChannelId());
+
+        if (optionalChannel.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Channel channel = optionalChannel.get();
+        channel.getUsers().add(request.getUserId());
         channelService.save(channel);
 
         return ResponseEntity.ok().build();

@@ -13,13 +13,20 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/postgres_db
+    username: postgres_user
+    password: password
 
   kafka:
     producer:
       bootstrap-servers: localhost:9092
+
+  cassandra:
+    contact-points: localhost
+    port: 9042
+    keyspace-name: chat
+    local-datacenter: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
 
 server:
   port: ${PORT:0}

@@ -3,6 +3,7 @@ dependencies {
     implementation libs.spring.boot.web
     implementation libs.spring.boot.jpa
     implementation libs.spring.boot.kafka
+    implementation libs.spring.boot.cassandra
     implementation libs.spring.cloud.eureka.client
     implementation libs.spring.boot.oauth2.resource.server
     implementation libs.postgres
