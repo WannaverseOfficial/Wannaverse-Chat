@@ -2,6 +2,7 @@ package com.wannaverse.controllers;
 
 import com.wannaverse.dto.AddUserRequest;
 import com.wannaverse.persistence.Channel;
+import com.wannaverse.persistence.Visibility;
 import com.wannaverse.service.ChannelService;
 
 import jakarta.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -37,7 +39,9 @@ public class ChannelController {
             @Valid @RequestBody Channel channel, Principal principal) {
         channel.setCreationDate(System.currentTimeMillis());
 
-        if (channel.getOwnerId() == null || channel.getOwnerId().isEmpty()) {
+        if (channel.getOwnerId() == null
+                || channel.getOwnerId().isEmpty()
+                || !channel.getOwnerId().equals(principal.getName())) {
             channel.setOwnerId(principal.getName());
         }
 
@@ -80,7 +84,8 @@ public class ChannelController {
             String query,
             Optional<Integer> page,
             Optional<Integer> size,
-            Optional<String> channelId) {
+            Optional<String> channelId,
+            Principal principal) {
         if (channelId.isEmpty()) {
             return ResponseEntity.ok(
                     channelService.search(
@@ -91,10 +96,17 @@ public class ChannelController {
 
         Optional<Channel> optionalChannel = channelService.getChannelById(channelId.get());
 
-        if (optionalChannel.isPresent()) {
-            return ResponseEntity.ok(optionalChannel.get());
+        if (optionalChannel.isEmpty()) {
+            return ResponseEntity.ok().build();
         }
 
-        return ResponseEntity.ok().build();
+        Channel channel = optionalChannel.get();
+        List<String> users = channel.getUsers();
+
+        if (!users.contains(principal.getName()) && channel.getVisibility() == Visibility.PRIVATE) {
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.ok(optionalChannel.get());
     }
 }

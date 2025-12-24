@@ -5,8 +5,11 @@ import com.wannaverse.dto.MessageResponse;
 import com.wannaverse.persistence.Channel;
 import com.wannaverse.persistence.Message;
 import com.wannaverse.persistence.MessageKey;
+import com.wannaverse.persistence.Visibility;
 import com.wannaverse.service.ChannelService;
 import com.wannaverse.service.MessageService;
+
+import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Slice;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import tools.jackson.databind.ObjectMapper;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,6 +43,7 @@ public class MessageController {
     }
 
     @PutMapping
+    @Transactional
     public ResponseEntity<?> addMessageToChannel(
             @RequestBody CreateMessageRequest request, Principal principal) {
         Optional<Channel> optionalChannel = channelService.getChannelById(request.getChannelId());
@@ -52,8 +55,13 @@ public class MessageController {
         String userId = principal.getName();
         Channel channel = optionalChannel.get();
 
-        if (!channel.getUsers().contains(userId)) {
+        if (!channel.getUsers().contains(userId) && channel.getVisibility() == Visibility.PRIVATE) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        if (!channel.getUsers().contains(userId)) {
+            channel.getUsers().add(userId);
+            channelService.save(channel);
         }
 
         Message message = new Message();
@@ -75,13 +83,25 @@ public class MessageController {
 
     @GetMapping
     public ResponseEntity<?> getMessagesInChannel(
-            String channelId, Optional<Integer> page, Optional<Integer> size) {
+            String channelId, Optional<Integer> page, Optional<Integer> size, Principal principal) {
+        Optional<Channel> optionalChannel = channelService.getChannelById(channelId);
+
+        if (optionalChannel.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        Channel channel = optionalChannel.get();
+
+        if (!channel.getUsers().contains(principal.getName())
+                && channel.getVisibility() == Visibility.PRIVATE) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
         Slice<Message> slice =
                 messageService.getMessages(channelId, page.orElse(0), size.orElse(100));
-        List<Message> messages = slice.getContent();
-        int pageNumber = slice.getPageable().getPageNumber();
-        boolean hasNext = slice.hasNext();
 
-        return ResponseEntity.ok(new MessageResponse(messages, pageNumber, hasNext));
+        return ResponseEntity.ok(
+                new MessageResponse(
+                        slice.getContent(), slice.getPageable().getPageNumber(), slice.hasNext()));
     }
 }
