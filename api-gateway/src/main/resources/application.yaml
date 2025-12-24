@@ -16,6 +16,11 @@ spring:
               uri: lb://USERS-MICROSERVICE
               predicates:
                 - Path=/user/**
+
+            - id: messages-microservice-channels
+              uri: lb://MESSAGES-MICROSERVICE
+              predicates:
+                - Path=/channel**
 server:
   port: 8081
 
