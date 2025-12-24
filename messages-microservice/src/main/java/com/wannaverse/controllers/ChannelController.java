@@ -28,12 +28,12 @@ public class ChannelController {
         this.channelService = channelService;
     }
 
-    @PutMapping("/")
+    @PutMapping
     public ResponseEntity<?> createChannel(
             @Valid @RequestBody Channel channel, Principal principal) {
         channel.setCreationDate(System.currentTimeMillis());
 
-        if (channel.getOwnerId().isEmpty()) {
+        if (channel.getOwnerId() == null || channel.getOwnerId().isEmpty()) {
             channel.setOwnerId(principal.getName());
         }
 
@@ -42,21 +42,21 @@ public class ChannelController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<?> updateChannel(@Valid @RequestBody Channel channel) {
         channelService.save(channel);
 
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     public ResponseEntity<?> deleteChannel(String channelId) {
         channelService.getChannelById(channelId).ifPresent(channelService::delete);
 
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<?> search(
             String query,
             Optional<Integer> page,
