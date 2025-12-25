@@ -8,7 +8,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 @NoArgsConstructor
 @Data
-@Table("messages_by_channel")
+@Table("messages_by_channel_t")
 public class Message {
 
     @PrimaryKey private MessageKey key;

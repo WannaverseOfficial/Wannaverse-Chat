@@ -16,9 +16,11 @@ import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.*;
-
-import tools.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.Optional;
@@ -27,10 +29,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/message")
 public class MessageController {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final int DEFAULT_PAGE = 0;
+    private static final int DEFAULT_NUMBER_OF_MESSAGES_TO_RETURN = 100;
     private final MessageService messageService;
     private final ChannelService channelService;
-    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     public MessageController(
@@ -39,7 +41,6 @@ public class MessageController {
             KafkaTemplate<String, String> kafkaTemplate) {
         this.messageService = messageService;
         this.channelService = channelService;
-        this.kafkaTemplate = kafkaTemplate;
     }
 
     @PutMapping
@@ -76,8 +77,6 @@ public class MessageController {
 
         messageService.saveNewMessage(message);
 
-        kafkaTemplate.send("new-message-in-channel", OBJECT_MAPPER.writeValueAsString(message));
-
         return ResponseEntity.ok().build();
     }
 
@@ -98,7 +97,10 @@ public class MessageController {
         }
 
         Slice<Message> slice =
-                messageService.getMessages(channelId, page.orElse(0), size.orElse(100));
+                messageService.getMessages(
+                        channelId,
+                        page.orElse(DEFAULT_PAGE),
+                        size.orElse(DEFAULT_NUMBER_OF_MESSAGES_TO_RETURN));
 
         return ResponseEntity.ok(
                 new MessageResponse(
