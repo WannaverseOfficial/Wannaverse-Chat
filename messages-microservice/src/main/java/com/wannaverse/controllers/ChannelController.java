@@ -74,7 +74,13 @@ public class ChannelController {
 
     @DeleteMapping
     public ResponseEntity<?> deleteChannel(String channelId) {
-        channelService.getChannelById(channelId).ifPresent(channelService::delete);
+        Optional<Channel> optionalChannel = channelService.getChannelById(channelId);
+
+        if (optionalChannel.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        channelService.delete(optionalChannel.get());
 
         return ResponseEntity.ok().build();
     }
