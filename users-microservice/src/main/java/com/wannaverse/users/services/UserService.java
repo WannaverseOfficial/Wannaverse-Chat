@@ -6,6 +6,8 @@ import com.wannaverse.users.persistence.UserRepository;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Cacheable(value = "users", key = "#id")
     public Optional<User> getUserById(String id) {
         return userRepository.findUserById(id);
     }
@@ -31,10 +34,12 @@ public class UserService {
                         query, query, query, PageRequest.of(page, size));
     }
 
+    @CacheEvict(value = "users", key = "#user.id")
     public void save(User user) {
         userRepository.save(user);
     }
 
+    @CacheEvict(value = "users", key = "#savedUser.id")
     public void updateUser(User savedUser, User update) {
         savedUser.setFirstName(update.getFirstName());
         savedUser.setLastName(update.getLastName());
@@ -44,6 +49,7 @@ public class UserService {
     }
 
     @Transactional
+    @CacheEvict(value = "users", key = "#userId")
     public void createUser(String userId, User initial) {
         initial.setId(userId);
         initial.setCreationDate(System.currentTimeMillis());

@@ -19,6 +19,7 @@ spring-boot-validation = { group = "org.springframework.boot", name = "spring-bo
 spring-boot-oauth2-resource-server = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server" }
 spring-boot-kafka = { group = "org.springframework.boot", name = "spring-boot-starter-kafka" }
 spring-boot-cassandra = { group = "org.springframework.boot", name = "spring-boot-starter-data-cassandra" }
+spring-boot-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis" }
 
 spring-security-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server" }
 spring-cloud-eureka-server = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-server" }

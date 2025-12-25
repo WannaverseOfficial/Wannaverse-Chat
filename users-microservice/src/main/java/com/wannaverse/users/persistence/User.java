@@ -8,11 +8,13 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "users_t")
-public class User {
+public class User implements Serializable {
     @Id private String id;
 
     @Column private Long creationDate;
