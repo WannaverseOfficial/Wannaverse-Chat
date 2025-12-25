@@ -1,13 +1,16 @@
 services:
+  # After Cassandra is launched:
+  # docker exec -it cassandra bash -c "cqlsh -u cassandra -p cassandra"
+  # CREATE KEYSPACE spring_cassandra WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
   cassandra:
     image: cassandra:5.0.6
+    container_name: cassandra
     env_file:
       - .env
     ports:
       - "9042:9042"
     volumes:
       - cassandra-data:/var/lib/cassandra
-
 
   kafka:
     image: apache/kafka:4.1.1

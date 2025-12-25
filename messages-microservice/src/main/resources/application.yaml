@@ -1,6 +1,13 @@
 spring:
   application:
-    name: authorization-microservice
+    name: messages-microservice
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/oauth2/jwks
+          audiences: wannaverse-chat
 
   jpa:
     hibernate:
@@ -13,6 +20,13 @@ spring:
   kafka:
     producer:
       bootstrap-servers: localhost:9092
+
+  cassandra:
+    contact-points: localhost
+    port: 9042
+    keyspace-name: chat
+    local-datacenter: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
 
 server:
   port: ${PORT:0}

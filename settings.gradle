@@ -5,3 +5,5 @@ include 'discovery-service'
 include 'api-gateway'
 
 include 'authorization-microservice'
+
+include 'messages-microservice'
