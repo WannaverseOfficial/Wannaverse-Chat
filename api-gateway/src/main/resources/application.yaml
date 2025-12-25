@@ -27,11 +27,11 @@ spring:
               predicates:
                 - Path=/message**
 server:
-  port: 8081
+  port: ${PORT:0}
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_HOST:http://discovery:8761/eureka}
     register-with-eureka: true
     fetchRegistry: true

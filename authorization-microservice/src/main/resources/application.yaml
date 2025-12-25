@@ -6,13 +6,13 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres_db
-    username: postgres_user
-    password: password
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
 
   kafka:
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:localhost:9092}
 
 server:
   port: ${PORT:0}
@@ -23,6 +23,8 @@ logging:
     com.wannaverse: ${LOG_LEVEL:TRACE}
 
 eureka:
+  instance:
+    hostname: discovery
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka

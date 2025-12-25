@@ -30,6 +30,62 @@ services:
     volumes:
       - pg-data:/var/lib/postgresql/data
 
+  discovery:
+    container_name: discovery
+    build: ./discovery-service
+    ports:
+      - "8761:8761"
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_started
+
+  apigw:
+    container_name: apigw
+    build: ./api-gateway
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: 8081
+      EUREKA_HOST: http://discovery:8761/eureka
+    depends_on:
+      discovery:
+        condition: service_started
+      authorization:
+        condition: service_started
+      users:
+        condition: service_started
+      messages:
+        condition: service_started
+
+  authorization:
+    container_name: authorization
+    build: ./authorization-microservice
+    environment:
+      KAFKA_BOOTSTRAP_SERVER: kafka:9092
+      DATABASE_URL: jdbc:postgresql://postgres:5432/postgres_db
+      DATABASE_USERNAME: postgres_user
+      DATABASE_PASSWORD: password
+
+  users:
+    container_name: users
+    build: ./users-microservice
+    environment:
+      KAFKA_BOOTSTRAP_SERVER: kafka:9092
+      DATABASE_URL: jdbc:postgresql://postgres:5432/postgres_db
+      DATABASE_USERNAME: postgres_user
+      DATABASE_PASSWORD: password
+
+  messages:
+    container_name: messages
+    build: ./messages-microservice
+    environment:
+      KAFKA_BOOTSTRAP_SERVER: kafka:9092
+      DATABASE_URL: jdbc:postgresql://postgres:5432/postgres_db
+      DATABASE_USERNAME: postgres_user
+      DATABASE_PASSWORD: password
+
+
 volumes:
   pg-data:
   cassandra-data:

@@ -18,6 +18,7 @@ spring-boot-security = { group = "org.springframework.boot", name = "spring-boot
 spring-boot-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 spring-boot-oauth2-resource-server = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server" }
 spring-boot-kafka = { group = "org.springframework.boot", name = "spring-boot-starter-kafka" }
+spring-boot-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
 spring-boot-cassandra = { group = "org.springframework.boot", name = "spring-boot-starter-data-cassandra" }
 
 spring-security-authorization-server = { group = "org.springframework.security", name = "spring-security-oauth2-authorization-server" }
