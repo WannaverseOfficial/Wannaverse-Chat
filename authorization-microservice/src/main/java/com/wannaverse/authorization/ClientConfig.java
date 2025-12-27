@@ -9,6 +9,9 @@ import org.springframework.security.oauth2.server.authorization.client.InMemoryR
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+
+import java.time.Duration;
 
 @Configuration
 public class ClientConfig {
@@ -39,6 +42,10 @@ public class ClientConfig {
                                 ClientSettings.builder()
                                         .requireProofKey(false)
                                         .requireAuthorizationConsent(false)
+                                        .build())
+                        .tokenSettings(
+                                TokenSettings.builder()
+                                        .accessTokenTimeToLive(Duration.ofDays(1))
                                         .build())
                         .build();
 
